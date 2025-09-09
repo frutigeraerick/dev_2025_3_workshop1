@@ -1,90 +1,70 @@
 class Conversion:
     def celsius_a_fahrenheit(self, celsius):
-        fahrenheit = (celsius * 9/5) + 32
-        return fahrenheit
-    
+        return (celsius * 9/5) + 32
+
     def fahrenheit_a_celsius(self, fahrenheit):
-        celsius = (fahrenheit - 32) * 5/9
-        return celsius
-    
+        return (fahrenheit - 32) * 5/9
+
     def metros_a_pies(self, metros):
-        pies = metros * 3.28084
-        return pies
-    
+        return metros * 3.28084
+
     def pies_a_metros(self, pies):
-        metros = pies / 3.28084
-        return metros
-    
+        return pies * 0.3048
+
     def decimal_a_binario(self, decimal):
-        binario = bin(decimal)[2:]
-        return binario
-    
+        return bin(decimal)[2:]
+
     def binario_a_decimal(self, binario):
-        decimal = int(binario, 2)
-        return decimal
-    
+        return int(binario, 2)
+
     def decimal_a_romano(self, numero):
-        if numero < 1 or numero > 3999:
-            return "El número debe estar entre 1 y 3999"
-        
-        valores = [
-            (1000, "M"), (900, "CM"), (500, "D"), (400, "CD"),
-            (100, "C"), (90, "XC"), (50, "L"), (40, "XL"),
-            (10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I")
+        valores_romanos = [
+            (1000, 'M'), (900, 'CM'), (500, 'D'), (400, 'CD'),
+            (100, 'C'), (90, 'XC'), (50, 'L'), (40, 'XL'),
+            (10, 'X'), (9, 'IX'), (5, 'V'), (4, 'IV'),
+            (1, 'I')
         ]
-        romano = ""
-        for valor, simbolo in valores:
+        romano = ''
+        for valor, simbolo in valores_romanos:
             while numero >= valor:
                 romano += simbolo
                 numero -= valor
         return romano
 
     def romano_a_decimal(self, romano):
-        valores = {
-            "I": 1, "V": 5, "X": 10, "L": 50,
-            "C": 100, "D": 500, "M": 1000
+        valores_romanos = {
+            'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000
         }
-        total = 0
-        i = 0
-        while i < len(romano):
-            if i + 1 < len(romano) and valores[romano[i]] < valores[romano[i + 1]]:
-                total += valores[romano[i + 1]] - valores[romano[i]]
-                i += 2
+        decimal = 0
+        for i in range(len(romano)):
+            if i + 1 < len(romano) and valores_romanos[romano[i]] < valores_romanos[romano[i + 1]]:
+                decimal -= valores_romanos[romano[i]]
             else:
-                total += valores[romano[i]]
-                i += 1
-        return total
+                decimal += valores_romanos[romano[i]]
+        return decimal
 
     def texto_a_morse(self, texto):
         morse_dict = {
-            "A": ".-", "B": "-...", "C": "-.-.", "D": "-..",
-            "E": ".", "F": "..-.", "G": "--.", "H": "....",
-            "I": "..", "J": ".---", "K": "-.-", "L": ".-..",
-            "M": "--", "N": "-.", "O": "---", "P": ".--.",
-            "Q": "--.-", "R": ".-.", "S": "...", "T": "-",
-            "U": "..-", "V": "...-", "W": ".--", "X": "-..-",
-            "Y": "-.--", "Z": "--..",
-            "0": "-----", "1": ".----", "2": "..---", "3": "...--",
-            "4": "....-", "5": ".....", "6": "-....", "7": "--...",
-            "8": "---..", "9": "----."
+            'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
+            'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
+            'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
+            'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+            'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--',
+            '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..',
+            '9': '----.', '0': '-----', ' ': '/'
         }
         texto = texto.upper()
-        morse = " ".join(morse_dict[c] for c in texto if c in morse_dict)
-        return morse
+        return ' '.join([morse_dict[char] for char in texto if char in morse_dict])
 
     def morse_a_texto(self, morse):
         morse_dict = {
-            ".-": "A", "-...": "B", "-.-.": "C", "-..": "D",
-            ".": "E", "..-.": "F", "--.": "G", "....": "H",
-            "..": "I", ".---": "J", "-.-": "K", ".-..": "L",
-            "--": "M", "-.": "N", "---": "O", ".--.": "P",
-            "--.-": "Q", ".-.": "R", "...": "S", "-": "T",
-            "..-": "U", "...-": "V", ".--": "W", "-..-": "X",
-            "-.--": "Y", "--..": "Z",
-            "-----": "0", ".----": "1", "..---": "2", "...--": "3",
-            "....-": "4", ".....": "5", "-....": "6", "--...": "7",
-            "---..": "8", "----.": "9"
+            '.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E', '..-.': 'F',
+            '--.': 'G', '....': 'H', '..': 'I', '.---': 'J', '-.-': 'K', '.-..': 'L',
+            '--': 'M', '-.': 'N', '---': 'O', '.--.': 'P', '--.-': 'Q', '.-.': 'R',
+            '...': 'S', '-': 'T', '..-': 'U', '...-': 'V', '.--': 'W', '-..-': 'X',
+            '-.--': 'Y', '--..': 'Z', '.----': '1', '..---': '2', '...--': '3',
+            '....-': '4', '.....': '5', '-....': '6', '--...': '7', '---..': '8',
+            '----.': '9', '-----': '0', '/': ' '
         }
-        inv_morse_dict = {v: k for k, v in morse_dict.items()}
-        texto = "".join(inv_morse_dict[c] for c in morse.split() if c in inv_morse_dict)
-        return texto
+        morse = morse.split(' ')
+        return ''.join([morse_dict[code] for code in morse if code in morse_dict])
