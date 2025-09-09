@@ -34,7 +34,7 @@ class Data:
         return resultado
     
     def rotar_lista(self, lista, k):
-        k = k % len(lista)  # Para manejar k mayor que el tamaño de la lista
+        k = k % len(lista)  
         return lista[-k:] + lista[:-k]
     
     def encuentra_numero_faltante(self, lista):

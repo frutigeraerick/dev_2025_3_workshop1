@@ -66,14 +66,14 @@ class Geometria:
         return ((x1 + x2) / 2, (y1 + y2) / 2)
 
     def pendiente_recta(self, x1, y1, x2, y2):
-        if x2 - x1 == 0:  # Evitar división por cero
+        if x2 - x1 == 0:
             return float('inf')
         return (y2 - y1) / (x2 - x1)
 
     def ecuacion_recta(self, x1, y1, x2, y2):
         m = self.pendiente_recta(x1, y1, x2, y2)
         b = y1 - m * x1
-        return (-m, 1, -b)  # Coeficientes A, B, C de la ecuación Ax + By + C = 0
+        return (-m, 1, -b)
 
     def area_poligono_regular(self, num_lados, lado, apotema):
         return (num_lados * lado * apotema) / 2

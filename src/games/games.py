@@ -25,24 +25,20 @@ class Games:
         return "correcto"
     
     def ta_te_ti_ganador(self, tablero):
-        # Comprobar filas
         for fila in tablero:
             if fila[0] == fila[1] == fila[2] and fila[0] != " ":
                 return fila[0]
         
-        # Comprobar columnas
         for col in range(3):
             if tablero[0][col] == tablero[1][col] == tablero[2][col] and tablero[0][col] != " ":
                 return tablero[0][col]
         
-        # Comprobar diagonales
         if tablero[0][0] == tablero[1][1] == tablero[2][2] and tablero[0][0] != " ":
             return tablero[0][0]
         
         if tablero[0][2] == tablero[1][1] == tablero[2][0] and tablero[0][2] != " ":
             return tablero[0][2]
         
-        # Comprobar empate o continúa
         for fila in tablero:
             if " " in fila:
                 return "continua"
@@ -54,15 +50,14 @@ class Games:
     
     def validar_movimiento_torre_ajedrez(self, desde_fila, desde_col, hasta_fila, hasta_col, tablero):
         if desde_fila != hasta_fila and desde_col != hasta_col:
-            return False  # La torre solo puede moverse horizontal o verticalmente
+            return False 
         
-        # Comprobar si hay piezas en el camino (filas y columnas)
-        if desde_fila == hasta_fila:  # Movimiento horizontal
+        if desde_fila == hasta_fila: 
             rango = range(min(desde_col, hasta_col) + 1, max(desde_col, hasta_col))
             for col in rango:
                 if tablero[desde_fila][col] != " ":
                     return False
-        elif desde_col == hasta_col:  # Movimiento vertical
+        elif desde_col == hasta_col:  
             rango = range(min(desde_fila, hasta_fila) + 1, max(desde_fila, hasta_fila))
             for fila in rango:
                 if tablero[fila][desde_col] != " ":
